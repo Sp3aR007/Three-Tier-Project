@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: /url-shortener-react
+        working-directory: ./url-shortener-react
     outputs:
       sha_short: ${{ steps.sha_short.outputs.sha_short }}
     steps:
