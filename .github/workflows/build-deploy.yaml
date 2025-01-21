@@ -1,6 +1,12 @@
 name: Build and Deploy code
 
 on: [push, pull_request] 
+  # push:
+  #   paths: 
+  #   - 'url-shortener-react/**'
+  # pull_request:
+  #   paths: 
+  #   - 'url-shortener-react/**'
 
 jobs:
   build:
@@ -13,7 +19,9 @@ jobs:
       sha_short: ${{ steps.sha_short.outputs.sha_short }}
     steps:
       - name: Pulling git repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          path: url-shortener-react
       - name: print folder
         run: pwd
       - name: Login to Docker Hub
