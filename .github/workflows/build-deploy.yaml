@@ -16,7 +16,7 @@ jobs:
       sha_short: ${{ steps.sha_short.outputs.sha_short }}
     defaults:
       run:
-        working-directory: /url-shortener-react
+        working-directory: ./url-shortener-react
     steps:
       - name: Pulling git repo
         uses: actions/checkout@v4
