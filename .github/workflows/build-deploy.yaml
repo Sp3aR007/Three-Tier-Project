@@ -1,12 +1,12 @@
 name: Build and Deploy code
 
-on: [push, pull_request] 
-  # push:
-  #   paths: 
-  #   - 'url-shortener-react/**'
-  # pull_request:
-  #   paths: 
-  #   - 'url-shortener-react/**'
+on: 
+  push:
+    paths: 
+    - 'url-shortener-react/**'
+  pull_request:
+    paths: 
+    - 'url-shortener-react/**'
 
 jobs:
   build:
