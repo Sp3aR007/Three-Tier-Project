@@ -18,7 +18,7 @@ pipeline {
         // build the project and create a JAR file
         sh 'apt-get update && apt-get install -y sudo'
         sh 'cd url-shortener-sb'
-        sh 'sudo - su'
+        sh 'sudo su'
         sh "./mvnw clean package"
       }
     }
