@@ -19,7 +19,7 @@ pipeline {
         sh 'apt-get update && apt-get install -y sudo'
         sh 'cd url-shortener-sb'
         sh 'sudo su'
-        sh 'chmod +x mvnw'
+        sh 'chmod +x url-shortener-sb/mvnw'
         sh "./mvnw clean package"
       }
     }
