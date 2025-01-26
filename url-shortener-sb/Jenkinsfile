@@ -20,7 +20,7 @@ pipeline {
         sh 'sudo su'
         sh 'chmod +x url-shortener-sb/mvnw'
         sh 'cd url-shortener-sb'
-        sh "./mvnw clean package"
+        sh '"url-shortener-sb/mvnw" clean package'
       }
     }
     stage('Static Code Analysis') {
