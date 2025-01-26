@@ -19,7 +19,7 @@ pipeline {
         sh 'apt-get update && apt-get install -y sudo'
         sh 'cd url-shortener-sb'
         sh 'sudo su'
-        sh " "./mvnw" clean package"
+        sh '"./mvnw" clean package'
       }
     }
     stage('Static Code Analysis') {
