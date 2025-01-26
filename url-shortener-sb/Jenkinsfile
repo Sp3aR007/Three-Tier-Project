@@ -17,7 +17,8 @@ pipeline {
         sh 'ls -ltr'
         // build the project and create a JAR file
         sh 'apt-get update && apt-get install -y sudo'
-        sh 'cd url-shortener-sb && sudo mvnw clean package'
+        sh 'cd url-shortener-sb'
+        sh "sudo ./mvnw clean package"
       }
     }
     stage('Static Code Analysis') {
@@ -26,7 +27,8 @@ pipeline {
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd url-shortener-sb && sudo mvnw sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'cd url-shortener-sb'
+          sh "sudo mvnw sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}"
         }
       }
     }
