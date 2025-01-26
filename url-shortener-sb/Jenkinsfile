@@ -17,9 +17,9 @@ pipeline {
         sh 'ls -ltr'
         // build the project and create a JAR file
         sh 'apt-get update && apt-get install -y sudo'
-        sh 'cd url-shortener-sb'
         sh 'sudo su'
         sh 'chmod +x url-shortener-sb/mvnw'
+        sh 'cd url-shortener-sb'
         sh "url-shortener-sb/mvnw clean package"
       }
     }
