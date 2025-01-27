@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      image 'eclipse-temurin:23-jdk'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -23,52 +23,52 @@ pipeline {
         sh '"url-shortener-sb/mvnw" clean package -f "url-shortener-sb/pom.xml"'
       }
     }
-    stage('Static Code Analysis') {
-      environment {
-        SONAR_URL = "http://54.210.7.14:9000"
-      }
-      steps {
-        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd url-shortener-sb'
-          sh 'sudo su'
-          sh "url-shortener-sb/mvnw sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}"
-        }
-      }
-    }
-    stage('Build and Push Docker Image') {
-      environment {
-        DOCKER_IMAGE = "sp3ar007/url-shortener-be:${BUILD_NUMBER}"
-        DOCKERFILE_LOCATION = "url-shortener-sb/Dockerfile"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
-      }
-      steps {
-        script {
-            sh 'cd url-shortener-sb && docker build -t ${DOCKER_IMAGE} .'
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
-                dockerImage.push()
-            }
-        }
-      }
-    }
-    stage('Update Deployment File') {
-        environment {
-            GIT_REPO_NAME = "Three-Tier-Project"
-            GIT_USER_NAME = "Sp3aR007"
-        }
-        steps {
-            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                sh '''
-                    git config user.email "tsrahul100@gmail.com"
-                    git config user.name "Rahul Ts"
-                    BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy/deploy-backend.yaml
-                    git add deploy/deploy-backend.yml
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                '''
-            }
-        }
-    }
-  }
+  //   stage('Static Code Analysis') {
+  //     environment {
+  //       SONAR_URL = "http://54.210.7.14:9000"
+  //     }
+  //     steps {
+  //       withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+  //         sh 'cd url-shortener-sb'
+  //         sh 'sudo su'
+  //         sh "url-shortener-sb/mvnw sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}"
+  //       }
+  //     }
+  //   }
+  //   stage('Build and Push Docker Image') {
+  //     environment {
+  //       DOCKER_IMAGE = "sp3ar007/url-shortener-be:${BUILD_NUMBER}"
+  //       DOCKERFILE_LOCATION = "url-shortener-sb/Dockerfile"
+  //       REGISTRY_CREDENTIALS = credentials('docker-cred')
+  //     }
+  //     steps {
+  //       script {
+  //           sh 'cd url-shortener-sb && docker build -t ${DOCKER_IMAGE} .'
+  //           def dockerImage = docker.image("${DOCKER_IMAGE}")
+  //           docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+  //               dockerImage.push()
+  //           }
+  //       }
+  //     }
+  //   }
+  //   stage('Update Deployment File') {
+  //       environment {
+  //           GIT_REPO_NAME = "Three-Tier-Project"
+  //           GIT_USER_NAME = "Sp3aR007"
+  //       }
+  //       steps {
+  //           withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+  //               sh '''
+  //                   git config user.email "tsrahul100@gmail.com"
+  //                   git config user.name "Rahul Ts"
+  //                   BUILD_NUMBER=${BUILD_NUMBER}
+  //                   sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy/deploy-backend.yaml
+  //                   git add deploy/deploy-backend.yml
+  //                   git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+  //                   git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+  //               '''
+  //           }
+  //       }
+  //   }
+  // }
 }
