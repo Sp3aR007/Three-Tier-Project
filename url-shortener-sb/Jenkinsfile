@@ -31,7 +31,7 @@ pipeline {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
           sh 'cd url-shortener-sb'
           sh 'sudo su'
-          sh ' "url-shortener-sb/mvnw" sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL} '
+          sh ' "url-shortener-sb/mvnw" -f "url-shortener-sb/pom.xml" sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL} '
         }
       }
     }
