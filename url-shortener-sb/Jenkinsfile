@@ -61,6 +61,7 @@ pipeline {
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
+                    pwd
                     git config user.email "tsrahul100@gmail.com"
                     git config user.name "Rahul Ts"
                     BUILD_NUMBER=${BUILD_NUMBER}
