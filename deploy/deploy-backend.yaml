@@ -30,4 +30,8 @@ spec:
           value: frontend-service.default.svc.cluster.local
         - name: DATABASE_DIALECT
           value: org.hibernate.dialect.PostgreSQLDialect
+<<<<<<< HEAD
     
+=======
+    
+>>>>>>> 83999dbe959f08eeac3660d51b6ada06b426c354
