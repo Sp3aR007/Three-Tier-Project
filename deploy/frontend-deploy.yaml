@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: sp3ar007/url-shortener-fe:{{ image_deploy_tag }}
+        image: sp3ar007/url-shortener-fe:k8s
         imagePullPolicy: Always
         ports:
         - containerPort: 80
