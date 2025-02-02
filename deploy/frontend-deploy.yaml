@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: sp3ar007/url-shortener-fe:k8s
+        image: sp3ar007/url-shortener-fe:k8s2
         imagePullPolicy: Always
         ports:
         - containerPort: 80
