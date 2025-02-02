@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend-sb
+        image: sp3ar007/url-shortener-be:1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_USERNAME
+          value: springboot
+        - name: DATABASE_PASSWORD
+          value: postgres
+        - name: DATABASE_URL
+          value: jdbc:postgresql://my-postgresql-rw.default.svc.cluster.local:5432/urlshortenerdb
+        - name: FRONTEND_URL
+          value: frontend-service.default.svc.cluster.local
+        - name: DATABASE_DIALECT
+          value: org.hibernate.dialect.PostgreSQLDialect
+    

@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: fe-app-route
+spec:
+  parentRefs:
+  - name: app-gateway
+    namespace: default
+  hostnames:
+  - "34.133.212.56.nip.io"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: frontend-service
+      port: 80

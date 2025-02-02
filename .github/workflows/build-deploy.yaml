@@ -47,48 +47,51 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/url-shortener-fe:sha-${{ steps.sha_short.outputs.sha_short }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
+          build-args: |
+            VITE_BACKEND_URL=${{secrets.VITE_BACKEND_URL}}
+            VITE_REACT_FRONT_END_URL=${{secrets.VITE_REACT_FRONT_END_URL}}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: [build]
-  #   environment:
-  #     name: production
-  #   env:
-  #     sha_short: ${{ needs.build.outputs.sha_short}}
-  #   steps:
-  #     - name: pulling git repo
-  #       uses: actions/checkout@v2
-  #     - name: Generate deploy manifest from Jinja template
-  #       uses: cuchi/jinja2-action@v1.1.0
-  #       with: 
-  #         template: tmpl/deploy.j2
-  #         output_file: ./deploy.yaml
-  #         strict: true
-  #         variables: |
-  #           image_deploy_tag=sha-${{ env.sha_short }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    environment:
+      name: production
+    env:
+      sha_short: ${{ needs.build.outputs.sha_short}}
+    steps:
+      - name: pulling git repo
+        uses: actions/checkout@v2
+      - name: Generate deploy manifest from Jinja template
+        uses: cuchi/jinja2-action@v1.1.0
+        with: 
+          template: deploy/tmpl/deploy.j2
+          output_file: deploy/deploy.yaml
+          strict: true
+          variables: |
+            image_deploy_tag=sha-${{ env.sha_short }}
             
-  #     - name: Configure git for the action
-  #       run: |
-  #         git config --local user.email "action@github.com"
-  #         git config --local user.name "GitHub Action"
+      - name: Configure git for the action
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           
-  #     - name: Stash unstaged changes
-  #       run: git stash --include-untracked
+      - name: Stash unstaged changes
+        run: git stash --include-untracked
         
-  #     - name: Pull latest changes from the remote branch
-  #       run: git pull origin main --rebase
+      - name: Pull latest changes from the remote branch
+        run: git pull origin main --rebase
         
-  #     - name: Apply stashed changes
-  #       run: git stash pop || echo "No stashed changes to apply"
+      - name: Apply stashed changes
+        run: git stash pop || echo "No stashed changes to apply"
 
-  #     - name: Commit deploy manifest on local repo
-  #       run: |
-  #         git add ./deploy.yaml
-  #         git commit -s -m "[skip ci] Generate deployment manifests"
+      - name: Commit deploy manifest on local repo
+        run: |
+          git add ./deploy.yaml
+          git commit -s -m "[skip ci] Generate deployment manifests"
           
-  #     - name: Push deploy manifests to remote repo
-  #       uses: ad-m/github-push-action@v0.6.0
-  #       with: 
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         branch: main
+      - name: Push deploy manifests to remote repo
+        uses: ad-m/github-push-action@v0.6.0
+        with: 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
