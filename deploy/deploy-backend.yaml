@@ -27,7 +27,7 @@ spec:
         - name: DATABASE_URL
           value: jdbc:postgresql://my-postgresql-rw.default.svc.cluster.local:5432/urlshortenerdb
         - name: FRONTEND_URL
-          value: https://35.184.242.16.nip.io/
+          value: https://35.184.242.16.nip.io
         - name: DATABASE_DIALECT
           value: org.hibernate.dialect.PostgreSQLDialect
 

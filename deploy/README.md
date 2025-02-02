@@ -9,7 +9,7 @@ docker run -d \
   -e DATABASE_PASSWORD=postgres \
   -e DATABASE_DIALECT=org.hibernate.dialect.PostgreSQLDialect \
   -e FRONTEND_URL=http://localhost \
-   sp3ar007/url-shortener-be
+   sp3ar007/url-shortener-be:1
 
 
-# docker build --build-arg VITE_BACKEND_URL=http://localhost:8080 --build-arg VITE_REACT_FRONT_END_URL=http://localhost:80 -t sp3ar007/demofe:local .
+docker build --build-arg VITE_BACKEND_URL=https://35.184.242.16.nip.io --build-arg VITE_REACT_FRONT_END_URL=https://35.184.242.16.nip.io -t sp3ar007/url-shortener-fe:k8s2 .
