@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-sb
-        image: sp3ar007/url-shortener-be:replaceImageTag
+        image: sp3ar007/url-shortener-be:1
         ports:
         - containerPort: 8080
         env:
