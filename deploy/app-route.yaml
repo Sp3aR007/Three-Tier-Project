@@ -7,7 +7,7 @@ spec:
   - name: app-gateway
     namespace: default
   hostnames:
-  - "34.133.212.56.nip.io"
+  - "35.184.242.16.nip.io"
   rules:
   - matches:
     - path:
@@ -15,4 +15,11 @@ spec:
         value: /
     backendRefs:
     - name: frontend-service
+      port: 80
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api
+    backendRefs:
+    - name: backend-service
       port: 80
