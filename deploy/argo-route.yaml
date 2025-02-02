@@ -8,7 +8,7 @@ spec:
   - name: app-gateway
     namespace: default
   hostnames:
-  - "argo.34.133.212.56.nip.io"
+  - "argo.35.184.242.16.nip.io"
   rules:
   - matches:
       - path:
