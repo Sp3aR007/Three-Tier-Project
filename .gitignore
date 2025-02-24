@@ -1,2 +1,7 @@
 url-shortener-react\node_modules
 url-shortener-react\dist
+.vscode/
+**/.terraform
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup

@@ -1,0 +1,51 @@
+---
+- hosts: frontend
+  become: yes
+  tasks:
+    - name: Clone a github repository
+      git:
+        repo: https://github.com/Sp3aR007/Three-Tier-Project.git
+        dest: /home/ubuntu/repos/
+        clone: yes
+        update: yes
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+    # - name: Install Node.js 
+    #   apt:
+    #    name: nodejs
+    #    state: present
+    #    update_cache: yes
+    - name: Install NPM Package manager
+      apt:
+        name: npm
+        state: present
+        update_cache: yes
+    - name: Change working directory and install packages
+      command: npm install package.json
+      args:
+        chdir: /home/ubuntu/repos/url-shortener-react
+    - name: Build the application
+      command: npm run build
+      args:
+        chdir: /home/ubuntu/repos/url-shortener-react
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+    - name: Copy a file from source to destination
+      copy:
+        src: /home/ubuntu/repos/url-shortener-react/dist/
+        dest: /usr/share/nginx/html/
+        remote_src: yes
+    - name: Copy Nginx configuration file
+      copy:
+        src: /home/ubuntu/repos/url-shortener-react/nginx.conf
+        dest: /etc/nginx/sites-available/default
+        owner: root
+        group: root
+        mode: 0644
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
