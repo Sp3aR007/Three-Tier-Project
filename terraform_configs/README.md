@@ -14,7 +14,7 @@ aws configure
 terraform init
 ```
 
-## Create an execution plan and
+## Create an execution plan
 ```
 terraform plan
 ```
