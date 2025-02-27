@@ -1,7 +1,7 @@
 ---
 - hosts: backend
   become: yes
-  connection: local
+  # connection: local
   tasks:
     - name: Clone a github repository
       git:
