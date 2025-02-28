@@ -28,3 +28,18 @@ terraform apply
 ```
 terraform destroy
 ```
+
+# Deployment details
+
+## Application configured with Application Load Balancer
+
+![Terrafrom-Deploy-ALB](../images/terraform-deploy.png)
+
+## Configured to backend and logged in with backend
+
+![Terrafrom-Backend](../images/terraform-deploy-2.png)
+
+## Configured to database and retreiveing data from database
+
+![Terrafrom-Backend-Database](../images/terraform-deploy-3.png)
+
