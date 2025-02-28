@@ -19,6 +19,7 @@ project-root/
 
 The url-shortener-react/ directory contains all the client side code:
 
+```
 url-shortener-react/
 |-- Dockerfile                # Docker file for frontend
 |-- README.md                 # README file for frontend
@@ -48,12 +49,15 @@ url-shortener-react/
 |   `-- utils/
 |-- tailwind.config.js
 `-- vite.config.js
+```
 
-Link to the [# README](./url-shortener-react/README.md) file.
+Link to the [README](./url-shortener-react/README.md) file for deployment details.
+
 # Backend
 
 The url-shortener-sb/ directory contains all the server side code:
 
+```
 url-shortener-sb/ 
 |-- Dockerfile                # Docker file for backend
 |-- Jenkinsfile               # Jenkins pipeline for backend
@@ -63,13 +67,17 @@ url-shortener-sb/
 `-- src                       # Appplication source code
     |-- main
     `-- test
+```
+
+Link to the [README](./url-shortener-sb/README.md) file for deployment details.
 
 # Terraform
 
-The terraform_configs/ directory contains all the code for terraform configuration:
+The terraform_configs/ directory contains all the code for Terraform configuration:
 
+```
 terraform_configs/            
-|-- README.md                 # README file for terraform configuration
+|-- README.md                 # README file for Terraform configuration
 |-- alb.tf
 |-- gateway.tf
 |-- instances.tf
@@ -84,21 +92,29 @@ terraform_configs/
 |-- target_grp.tf
 |-- tg_attachment.tf
 `-- vpc.tf
+```
+
+Link to the [README](./terraform_configs/README.md) file for Terraform deployment details.
 
 # Ansible
 
-The ansible_configs/ directory contains all the code for ansible configuration:
+The ansible_configs/ directory contains all the code for Ansible configuration:
 
+```
 ansible_configs/
 |-- README.md                 # README file for ansible configuration
 |-- backend-playbook.yaml
 |-- frontend-playbook.yaml
 `-- inventory.ini
+```
+
+Link to the [README](./ansible_configs/README.md) file for Ansible configuration details.
 
 # Kubernetes
 
 The deploy/ directory contains all the code for Kubernetes configuration:
 
+```
 deploy/
 |-- README.md                 # README file for Kubernetes configuration
 |-- app-route.yaml
@@ -114,6 +130,9 @@ deploy/
 |-- secret.yaml
 `-- tmpl
     `-- deploy.j2
+```
+
+Link to the [README](./deploy/README.md) file for Kubernetes deployment details.
 
 # Github Actions
 
