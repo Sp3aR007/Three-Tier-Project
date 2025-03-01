@@ -10,7 +10,7 @@ This contains Terrafrom configurations to deploy and manage AWS infrastructure a
 aws configure
 ```
 
-# Terraform cnfiguration
+# Terraform configuration 
 
 ## Intialise the terraform
 ```
