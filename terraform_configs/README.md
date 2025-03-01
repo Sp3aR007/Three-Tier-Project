@@ -1,8 +1,11 @@
 This contains Terrafrom configurations to deploy and manage AWS infrastructure as code. This is a three tier application which has a application load balancer, frontend instances in public subnet, backend and database instances in private subnet.
 
-# AWS configuration [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+# Architecture for application on AWS 
 
-## Enter the AWS credentials
+![Three-Tier-Architecture](../images/three-tier-architecture.drawio.png)
+
+## Enter the AWS credentials [Link to AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
 ```
 aws configure
 ```
